@@ -12,7 +12,7 @@ Unicode快闪，但是懒人版！<br/>
 - pygame————代码核心，用于生成快闪的界面；
 - [unicode_charnames](https://github.com/mlodewijck/unicode_charnames)————用于显示这个字符在Unicode中的英文名称；
 - [unidata_blocks](https://github.com/TakWolf/unidata-blocks)————用于显示字符所在区块，由国人制作，自带中文（赞）；<br/>
-其中pygame、unicode_charnames、unidata_blocks需要使用pip安装第三方库。
+其中pygame、unicode_charnames、unidata_blocks需要使用pip安装第三方库，如需打包成exe，请手动把unicode_charnames和unidata_blocks打包到exe里。
 ## 上传版本须知：
 由于Github本身有一定的限制，所以有关当前版本和上传版本的内容会和百度网盘版有所偏差：
 - 快闪小曲音质为40kbps，百度网盘的音质为128kbps，这是因为Github无法上传太大的文件，源文件的音乐大小高达70MB，塞不了，被迫压缩，后面会想办法使用外置音乐播放（多此一举了属于是）
@@ -27,4 +27,4 @@ Unicode快闪，但是懒人版！<br/>
 - 预留时间（防止录屏软件没反应过来漏露了几个字符）
 - 多字体模式（当前输出只支持一键生成字符，之后会开发单字体的自定义字符范畴模式）
 ## 其他
-如有出现bug的情况请在我的b站账号上反馈，这里不常上，在这的问题反馈可能看不到。
+如有出现小bug的情况请在我的b站账号上反馈，如果有推荐的py第三方库（可在Pypi官网正常安装的那种）请在这里反馈。
