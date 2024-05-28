@@ -11,7 +11,7 @@ Unicode快闪，但是懒人版！<br/>
 - fonttools————用于一键生成字符；
 - pygame————代码核心，用于生成快闪的界面；
 - [unicode_charnames](https://github.com/mlodewijck/unicode_charnames)————用于显示这个字符在Unicode中的英文名称；
-- [unidata_blocks](https://github.com/TakWolf/unidata-blocks)————用于显示字符所在区块，由国人制作，自带中文（赞）；
+- [unidata_blocks](https://github.com/TakWolf/unidata-blocks)————用于显示字符所在区块，由国人制作，自带中文（赞）；<br/>
 其中pygame、unicode_charnames、unidata_blocks需要使用pip安装第三方库。
 ## 上传版本须知：
 由于Github本身有一定的限制，所以有关当前版本和上传版本的内容会和百度网盘版有所偏差：
