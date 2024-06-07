@@ -25,10 +25,15 @@ def start():
     def open_file_dialogs():
         global filenames
         filenames = filedialog.askopenfilenames(filetypes=[("字体文件", ("*.ttf", "*.ttc", "*.TTF", "*.otf",))])    
-        if filenames:  # 确保用户选择了文件  
+        if filenames: 
             selected_font_paths.extend(filenames)
             tka6.config(text=limit_text_length("已选择字体：" + ", ".join(filenames), 500))
         print(filenames)
+    def open_file_dialogx():
+        global filenamex
+        filenamex = filedialog.askopenfilename(filetypes=[("字体文件", ("*.ttf", "*.ttc", "*.TTF", "*.otf",))])
+        tkb8.config(text=filenamex)
+        print(filenamex)
     def to_print_support_font(): #中转到print_support_font函数 
         for font_path in selected_font_path:  
             print_support_font(font_path)
@@ -39,6 +44,10 @@ def start():
         global append_mode 
         append_mode = not append_mode  
         print("追加模式:", append_mode) #默认关闭，开启后就会变成在原文本后面再追加内容
+    def false_append_mode():
+        global append_mode 
+        append_mode = False  
+        print("追加模式已归位为", append_mode)
     def print_support_font(font_path, start=0, end=0x10FFFF):  #一键输出字体内支持的文字 
         font = TTFont(font_path)
         cmap = font.getBestCmap()  
@@ -66,8 +75,38 @@ def start():
         text_files = [f for f in os.listdir('.') if f.endswith('.txt') and f.startswith('字符输出')]#标识文字，避免误伤单字体用的文件，之后的匹配文字同理
         for file in text_files:
             os.remove(file)
+    def unicode_write(): #用于多文本模式挨个生成文件
+        gtka11=tka11.get()
+        gtka12=tka12.get()
+        try:  
+            start = int(gtka11, 16)  
+            end = int(gtka12, 16)  
+            if start > end:  
+                messagebox.showerror("错误", "起始码位必须小于或等于结束码位！")  
+                return
+            try:
+                if append_mode == False:
+                    with open(f'字符输出_{filenamex.rsplit("/", 1)[-1].rsplit(".", 1)[0]}.txt', "w", encoding="utf-8") as f:  
+                        f.write(filenamex+"\n") 
+                        for code in range(start, end + 1):  
+                            if 0xD800 <= code <= 0xDFFF: 
+                                continue  
+                            char = chr(code)  
+                            f.write(char)
+                filename_check = f'字符输出_{filenamex.rsplit("/", 1)[-1].rsplit(".", 1)[0]}.txt'
+                if append_mode == True and os.path.exists(filename_check):
+                    with open(f'字符输出_{filenamex.rsplit("/", 1)[-1].rsplit(".", 1)[0]}.txt', "a", encoding="utf-8") as f:  
+                        for code in range(start, end + 1):  
+                            if 0xD800 <= code <= 0xDFFF: 
+                                continue  
+                            char = chr(code)  
+                            f.write(char)
+            except NameError:
+                messagebox.showerror("错误", "尚未选择文件！")   
+        except ValueError:  
+            messagebox.showerror("错误", "格式错误！")      
     def fonts(): 
-        global tka6
+        global tka6,tka11,tka12
         root.withdraw()
         fontsui=Toplevel(root)
         fontsui.title("Unicode快闪懒人版——多字体选项")
@@ -77,7 +116,7 @@ def start():
         frame2.place(relx=0.5, rely=0.5, anchor="center")
         tka1 = tk.Label(frame2, text="选择多个字体设置")
         tka1.grid(row=0,column=1)
-        tkas =  tk.Label(frame2,text="一键输出多个字体内的所有字符并在主菜单内通过按钮运行，\n由于部分字体会夹带私用区或重复字符，\n生成后请检查一下重复生成的部分（如数字和字母）和私用区检查。\n在生成文件之前请提前为字体文件用字母或其他方式排序，\n否则很有可能会导致顺序错乱。")
+        tkas =  tk.Label(frame2,text="一键输出多个字体内的所有字符并在主菜单内通过按钮运行，\n由于部分字体会夹带私用区或重复字符，\n生成后请检查一下重复生成的部分（如数字和字母）和私用区检查，\n如果想要不出现不需要多余的字符，请使用普通的自定义字符范畴。\n在生成文件之前请提前为字体文件用字母或其他方式排序，\n否则很有可能会导致顺序错乱。")
         tkas.grid(row=1,column=1)
         tka2 = tk.Label(frame2,text = "选择多个字体")
         tka2.grid(row=2,column=0)
@@ -89,18 +128,24 @@ def start():
         tka5.grid(row=2,column=3)
         tka6 = tk.Label(frame2,text="未选择文件", wraplength=400)
         tka6.grid(row=3,column=1)
-        fontsui.protocol("WM_DELETE_WINDOW", lambda: (root.deiconify(),fontsui.destroy())) 
+        tka7 = tk.Label(frame2,text="选择单个字体")
+        tka7.grid(row=4,column=1)
+        tka8 = tk.Button(frame2,text="选择文件",command=open_file_dialogx)
+        tka8.grid(row=5,column=1)
+        tka9 = tk.Button(frame2,text="生成单个字体字符文件",command=unicode_write)
+        tka9.grid(row=5,column=2)
+        tka95= tk.Checkbutton(frame2,text="追加模式",command=toggle_append_mode)
+        tka95.grid(row=5,column=3)
+        tka10 = tk.Label(frame2,text="字符范畴")
+        tka10.grid(row=5,column=0)
+        tka11 = tk.Entry(frame2,width=6)
+        tka11.grid(row=6,column=1)
+        tka12 = tk.Entry(frame2,width=6)
+        tka12.grid(row=6,column=2)
+        fontsui.protocol("WM_DELETE_WINDOW", lambda: (root.deiconify(),fontsui.destroy(),false_append_mode())) 
         fontsui.mainloop
     frame = tk.Frame(root)
-    global tkb2
-    global tkb4
-    global tkb6
-    global tkb8
-    global tkb9
-    global tkb11
-    global tkb13
-    global tkbscreena
-    global tkbscreenb
+    global tkb2,tkb4,tkb6,tkb8,tkb9,tkb11,tkb13,tkbscreena,tkbscreenb
     frame.place(relx=0.5, rely=0.5, anchor="center")  
     tkb0 = tk.Label(frame, text="设置选项")  
     tkb0.grid(row=0, column=2)   
@@ -175,9 +220,12 @@ def playing1():
                 f.write(char)   
     except ValueError:  
         pass  #如果格式不对，则按照之前储存的文本显示（如果有）
-    root.destroy() 
-    with open('unicode生成.txt', 'r', encoding='utf-8') as file:  
-        characters = list(file.read())
+    try:
+        with open('unicode生成.txt', 'r', encoding='utf-8') as file:  
+            characters = list(file.read())
+    except FileNotFoundError:
+        messagebox.showerror("错误", "Unicode生成文件不存在！")
+        return
     def hex_to_rgb(hex_color):  
         try:
             hex_color = hex_color.lstrip('#') 
@@ -188,6 +236,7 @@ def playing1():
         except ValueError:
             messagebox.showerror("错误", "颜色代码必须是6个16进制字符")#因为是写在tkinter和pygame中央的函数，所以这个弹窗报错处理看上去有点磕碜
             sys.exit()#检测到颜色错误直接关闭程序
+    root.destroy() 
     pygame.init()  
     pygame.mixer.init()
     pygame.mixer.music.load("music.mp3")  
@@ -195,6 +244,7 @@ def playing1():
     icon = pygame.image.load("favicon.ico") 
     pygame.display.set_icon(icon)
     clock = pygame.time.Clock()
+    pygame.mouse.set_visible(False)
     try:
         if gtkb13:
             countdown = int(gtkb13)
@@ -242,8 +292,8 @@ def playing1():
         font4 = pygame.font.Font("simhei.ttf", int(width/25))
         while countdown > -1:
             screen.fill((r, g, b))
-            ready = str(countdown)
-            text_surface1 = font.render(ready, True, (0, 0, 0))
+            text = str(countdown)
+            text_surface1 = font.render(text, True, (0, 0, 0))
             text_rect1 = text_surface1.get_rect(center=(width // 2, height // 2))
             screen.blit(text_surface1, text_rect1) #倒计时显示，区分开原本的text防止代码冲突
             countdown -= 1
@@ -297,7 +347,6 @@ def playing1():
             text_surface4 = font4.render(text3.name_localized("zh"), True, (0, 0, 0))
             text_rect4 = text_surface4.get_rect(bottomleft=(30, height))
             screen.blit(text_surface4, text_rect4)
-
         pygame.display.flip()  
         frame = 1 #默认1帧
         try:  
@@ -327,7 +376,6 @@ def playing2():#多字体模式，代码与前者相似，这部分是由ChatGPT
                 font_path = lines[0].strip()
                 font_paths.append(font_path)
                 characters[font_path] = lines[1].strip()
-    root.destroy()
     def hex_to_rgb(hex_color):
         try:
             hex_color = hex_color.lstrip('#')
@@ -338,6 +386,7 @@ def playing2():#多字体模式，代码与前者相似，这部分是由ChatGPT
         except ValueError:
             messagebox.showerror("错误", "颜色代码必须是6个16进制字符")
             sys.exit()
+    root.destroy()
     pygame.init()
     pygame.mixer.init()
     pygame.mixer.music.load("music.mp3")
@@ -345,6 +394,7 @@ def playing2():#多字体模式，代码与前者相似，这部分是由ChatGPT
     icon = pygame.image.load("favicon.ico")
     pygame.display.set_icon(icon)
     clock = pygame.time.Clock()
+    pygame.mouse.set_visible(False)
     try:
         if gtkb13:
             countdown = int(gtkb13)
@@ -388,8 +438,8 @@ def playing2():#多字体模式，代码与前者相似，这部分是由ChatGPT
         font4 = pygame.font.Font("simhei.ttf", int(width / 25))
         while countdown > -1:
             screen.fill((r, g, b))
-            ready = str(countdown)
-            text_surface1 = font.render(ready, True, (0, 0, 0))
+            text = str(countdown)
+            text_surface1 = font.render(text, True, (0, 0, 0))
             text_rect1 = text_surface1.get_rect(center=(width // 2, height // 2))
             screen.blit(text_surface1, text_rect1)
             countdown -= 1
