@@ -2,7 +2,7 @@
 Unicode快闪，但是懒人版！<br/>
 
 受到[Losketch](https://github.com/Losketch/Unicode-Flash-Mob)的[Unicode快闪生成器](https://github.com/Losketch/Unicode-Flash-Mob) 启发制作的Python代码，由学过基础Python的我，聪明的文心一言、和擅长补救的ChatGPT和Copy Copilot编写而成<br/>
-相比于Losketch佬和另一位大佬的[Unicode快闪生成器](https://gitee.com/golllllll/unicode-flash-generator)，本代码更注重于简单粗暴轻量化，只需**一个**py文件和一些点缀的文件（图标、音乐和字体）<del>以及几个前置库</del>组成，内有用Tkinter库制作的UI界面方便设置参数，前面两者使用的快闪生成器均采用图片自动拼接的方式制作视频，而本代码使用的是<del>万能的</del>Pygame库直接在页面上以指定的帧数显示字符，你所需要的只是一个简单的60帧录屏软件（如OBS）设置好倒计时，等倒计时结束，快闪就会开始实时生成。
+相比于Losketch佬和另一位大佬的[Unicode快闪生成器](https://github.com/tile-WWDCCS-name/unicode-flash-generator)，本代码更注重于简单粗暴轻量化，只需**一个**py文件和一些点缀的文件（图标、音乐和字体）<del>以及几个前置库</del>组成，内有用Tkinter库制作的UI界面方便设置参数，前面两者使用的快闪生成器均采用图片自动拼接的方式制作视频，而本代码使用的是<del>万能的</del>Pygame库直接在页面上以指定的帧数显示字符，你所需要的只是一个简单的60帧录屏软件（如OBS）设置好倒计时，等倒计时结束，快闪就会开始实时生成。
 <br/>
 
 ## 当前版本运行环境:
