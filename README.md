@@ -12,7 +12,9 @@ Unicode快闪，但是懒人版！<br/>
 - fonttools————用于一键生成字符；
 - pygame————代码核心，用于生成快闪的界面；
 - [unicode_charnames](https://github.com/mlodewijck/unicode_charnames)————用于显示这个字符在Unicode中的英文名称；
-- [unidata_blocks](https://github.com/TakWolf/unidata-blocks)————用于显示字符所在区块，由国人制作，自带中文（赞）；<br/>
+  - **该前置库目前只有16.0.0版本，不支持CJK扩展J区，上一次更新是在去年，请注意；**
+- [unidata_blocks](https://github.com/TakWolf/unidata-blocks)————用于显示字符所在区块，由国人制作，自带中文（赞）；
+  - 目前为最新版本；<br/>
 其中pygame、unicode_charnames、unidata_blocks需要使用pip安装第三方库，如需打包成exe，请手动把unicode_charnames和unidata_blocks打包到exe里。
 ## 上传版本须知：
 由于Github本身有一定的限制，所以有关当前版本和上传版本的内容会和百度网盘版有所偏差：
@@ -32,7 +34,7 @@ Unicode快闪，但是懒人版！<br/>
 - <del>增加快捷填写特定区块范畴的功能（可能又得借助某些库的力量）</del>
 - <del>在程序内打开生成的文本文件，无需在外面点开文件</del>
 
-**考虑到当前代码已经完备，而且剩余内容可以自行修改，该项目已完结，除了必要的bug修复（然而并没有人提报bug）不会再继续更新。**（第三方库已更新Unicode 16.0）
+**考虑到当前代码已经完备，而且剩余内容可以自行修改，该项目已完结，除了必要的bug修复（然而并没有人提报bug）不会再继续更新。关于Unicode的版本支持，依赖于两个前置库的更新内容，与本项目无关。**
 ## 其他
 如有出现小bug的情况请在我的b站账号上反馈，如果有推荐的py第三方库（可在Pypi官网正常安装的那种）请在这里反馈。
 百度网盘链接：https://pan.baidu.com/s/1W9U2GM8Io1oEPGDBCabbQg，提取码：code
