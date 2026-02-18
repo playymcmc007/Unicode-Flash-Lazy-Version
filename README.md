@@ -65,4 +65,4 @@ Unicode快闪，但是懒人版！<br/>
 ## 其他
 
 如有出现小bug的情况请在我的b站账号上反馈，如果有推荐的py第三方库（可在Pypi官网正常安装的那种）请在这里反馈。
-百度网盘链接：https://pan.baidu.com/s/1W9U2GM8Io1oEPGDBCabbQg，提取码：code
+百度网盘：https://pan.baidu.com/s/1hMn02RUcpteFO57M_WbfRw 提取码:code
