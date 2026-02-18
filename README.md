@@ -18,6 +18,7 @@ Unicode快闪，但是懒人版！<br/>
 - [unidata_blocks](https://github.com/TakWolf/unidata-blocks)————用于显示字符所在区块，由国人制作，自带中文（赞）；
   - 目前为最新版本；<br/>
 - [easyfonts](https://github.com/xx025/easyfont)————用于替换原simhei字体文件，改为第三方库内置NotoSansSC字体
+- 
   其中pygame、unicode_charnames、unicodedata2、unidata_blocks、easyfonts需要使用pip安装第三方库。
 
 ## 上传音乐版本须知：
