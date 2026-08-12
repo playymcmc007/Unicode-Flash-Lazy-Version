@@ -23,6 +23,7 @@ Unicode快闪，但是懒人版！<br/>
 - [numpy](https://github.com/numpy/numpy)————用于配合cv2（OpenCV）生成快闪视频；
   - **numpy对旧版本的pyinstaller兼容性较差，如需打包成exe请使用最新的pyinstaller版本 ，避免出现打包报错的情况！**
 - [tkinterdnd2](https://github.com/Eliav2/tkinterdnd2)————用于tkinter的拖拽功能；
+  
   其中pygame、unicode_charnames、unicodedata2、unidata_blocks、easyfonts、portable_ffmpeg、numpy、tkinterdnd2需要使用pip安装第三方库。
 
 ## 上传音乐版本须知：
